@@ -12,7 +12,7 @@
 # For the list of contributors see $ROOTSYS/README/CREDITS.                    #
 ################################################################################
 
-from JupyROOT.helpers.utils import enableJSVis, disableJSVis, enableJSVisDebug, TBufferJSONErrorMessage, TBufferJSONAvailable
+from JupyROOT.interactive import enableJSVis, disableJSVis, enableJSVisDebug, TBufferJSONErrorMessage, IsTBufferJSONAvailable
 
 from metakernel import Magic, option
 
@@ -33,7 +33,7 @@ class JSRootMagics(Magic):
            enableJSVisDebug()
 
     def printErrorIfNeeded(self):
-        if not TBufferJSONAvailable():
+        if not IsTBufferJSONAvailable():
             self.kernel.Error(TBufferJSONErrorMessage)
 
 def register_magics(kernel):

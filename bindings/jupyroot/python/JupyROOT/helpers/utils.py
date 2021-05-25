@@ -27,7 +27,7 @@ import ROOT
 from IPython import get_ipython
 from IPython.core.extensions import ExtensionManager
 from IPython.display import HTML
-from JupyROOT import canvas
+from JupyROOT import canvas, interactive
 from JupyROOT.helpers import handlers
 
 # We want iPython to take over the graphics
@@ -279,10 +279,10 @@ TInterpreter::EErrorCode ProcessLineWrapper(const char* line) {
 """)
 
 def enhanceROOTModule():
-    ROOT.enableJSVis = canvas.enableJSVis
-    ROOT.disableJSVis = canvas.disableJSVis
-    ROOT.enableJSVisDebug = canvas.enableJSVisDebug
-    ROOT.disableJSVisDebug = canvas.disableJSVisDebug
+    ROOT.enableJSVis = interactive.enableJSVis
+    ROOT.disableJSVis = interactive.disableJSVis
+    ROOT.enableJSVisDebug = interactive.enableJSVisDebug
+    ROOT.disableJSVisDebug = interactive.disableJSVisDebug
 
 def enableCppHighlighting():
     ipDispJs = IPython.display.display_javascript

@@ -99,40 +99,6 @@ function display_{jsDivId}(Core) {{
 </script>
 """
 
-TBufferJSONErrorMessage="The TBufferJSON class is necessary for JS visualisation to work and cannot be found. Did you enable the http module (-D http=ON for CMake)?"
-
-def TBufferJSONAvailable():
-   if hasattr(ROOT,"TBufferJSON"):
-       return True
-   print(TBufferJSONErrorMessage, file=sys.stderr)
-   return False
-
-_enableJSVis = False
-_enableJSVisDebug = False
-def enableJSVis():
-    if not TBufferJSONAvailable():
-       return
-    global _enableJSVis
-    _enableJSVis = True
-
-def disableJSVis():
-    global _enableJSVis
-    _enableJSVis = False
-
-def enableJSVisDebug():
-    if not TBufferJSONAvailable():
-       return
-    global _enableJSVis
-    global _enableJSVisDebug
-    _enableJSVis = True
-    _enableJSVisDebug = True
-
-def disableJSVisDebug():
-    global _enableJSVis
-    global _enableJSVisDebug
-    _enableJSVis = False
-    _enableJSVisDebug = False
-
 def ProduceCanvasJson(canvas):
    # Add extra primitives to canvas with custom colors, palette, gStyle
    prim = canvas.GetListOfPrimitives()

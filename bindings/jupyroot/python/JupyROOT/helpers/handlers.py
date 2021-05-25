@@ -22,7 +22,7 @@ if sys.hexversion >= 0x3000000:
 else:
     import Queue as queue
 
-from JupyROOT import helpers
+from JupyROOT import canvas
 
 # import libJupyROOT with Python version number
 import importlib
@@ -169,7 +169,7 @@ class JupyROOTExecutor(Runner):
        super(JupyROOTExecutor, self).__init__(_lib.JupyROOTExecutor, poller)
 
 def display_drawables(displayFunction):
-    drawers = helpers.utils.GetDrawers()
+    drawers = canvas.GetDrawers()
     for drawer in drawers:
         for dobj in drawer.GetDrawableObjects():
             displayFunction(dobj)

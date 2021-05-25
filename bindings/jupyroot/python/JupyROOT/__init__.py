@@ -21,6 +21,7 @@ def _is_ipython():
         import __builtin__ as builtins # Py2
     return hasattr(builtins, '__IPYTHON__')
 
+
 # Check if we are in the IPython shell
 if _is_ipython():
     from IPython import get_ipython

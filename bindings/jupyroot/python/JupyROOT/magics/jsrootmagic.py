@@ -14,7 +14,7 @@
 
 from IPython.core.magic import (Magics, magics_class, line_magic)
 from IPython.core.magic_arguments import (argument, magic_arguments, parse_argstring)
-from JupyROOT.canvas import enableJSVis, disableJSVis, enableJSVisDebug
+from JupyROOT.interactive import enableJSVis, disableJSVis, enableJSVisDebug
 
 @magics_class
 class JSRootMagics(Magics):
