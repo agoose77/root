@@ -14,14 +14,15 @@
 from JupyROOT.helpers import utils
 from JupyROOT import cppcompleter
 
-# Check if we are in the IPython shell
-try:
-    import builtins
-except ImportError:
-    import __builtin__ as builtins # Py2
-_is_ipython = hasattr(builtins, '__IPYTHON__')
+def _is_ipython():
+    try:
+        import builtins
+    except ImportError:
+        import __builtin__ as builtins # Py2
+    return hasattr(builtins, '__IPYTHON__')
 
-if _is_ipython:
+# Check if we are in the IPython shell
+if _is_ipython():
     from IPython import get_ipython
     cppcompleter.load_ipython_extension(get_ipython())
     utils.iPythonize()
