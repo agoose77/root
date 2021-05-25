@@ -133,7 +133,7 @@ def disableJSVisDebug():
     _enableJSVis = False
     _enableJSVisDebug = False
 
-def produceCanvasJson(canvas):
+def ProduceCanvasJson(canvas):
    # Add extra primitives to canvas with custom colors, palette, gStyle
    prim = canvas.GetListOfPrimitives()
 
@@ -149,7 +149,8 @@ def produceCanvasJson(canvas):
 
    cnt = 0
    for n in range(colors.GetLast()+1):
-      if colors.At(n): cnt = cnt+1
+      if colors.At(n):
+          cnt = cnt+1
 
    # add all colors if there are more than 598 colors defined
    if cnt < 599 or prim.FindObject(colors):
@@ -170,9 +171,12 @@ def produceCanvasJson(canvas):
    canvas_json = ROOT.TBufferJSON.ConvertToJSON(canvas, 3)
 
    # Cleanup primitives after conversion
-   if style is not None: prim.Remove(style)
-   if colors is not None: prim.Remove(colors)
-   if palette is not None: prim.Remove(palette)
+   if style is not None:
+       prim.Remove(style)
+   if colors is not None:
+       prim.Remove(colors)
+   if palette is not None:
+       prim.Remove(palette)
 
    return canvas_json
 
@@ -181,9 +185,12 @@ def GetCanvasDrawers():
     return [NotebookDrawer(can) for can in lOfC if can.IsDrawn()]
 
 def GetGeometryDrawer():
-    if not hasattr(ROOT,'gGeoManager'): return
-    if not ROOT.gGeoManager: return
-    if not ROOT.gGeoManager.GetUserPaintVolume(): return
+    if not hasattr(ROOT, 'gGeoManager'):
+        return
+    if not ROOT.gGeoManager:
+        return
+    if not ROOT.gGeoManager.GetUserPaintVolume():
+        return
     vol = ROOT.gGeoManager.GetTopVolume()
     if vol:
         return NotebookDrawer(vol)
@@ -191,7 +198,8 @@ def GetGeometryDrawer():
 def GetDrawers():
     drawers = GetCanvasDrawers()
     geometryDrawer = GetGeometryDrawer()
-    if geometryDrawer: drawers.append(geometryDrawer)
+    if geometryDrawer:
+        drawers.append(geometryDrawer)
     return drawers
 
 def DrawGeometry():
@@ -260,9 +268,11 @@ class NotebookDrawer(object):
     def _canJsDisplay(self):
         if not TBufferJSONAvailable():
            return False
-        if not self.isCanvas: return True
+        if not self.isCanvas:
+            return True
         # to be optimised
-        if not _enableJSVis: return False
+        if not _enableJSVis:
+            return False
         primitivesTypesNames = self._getListOfPrimitivesNamesAndTypes()
         for unsupportedPattern in _jsNotDrawableClassesPatterns:
             for primitiveTypeName in primitivesTypesNames:
@@ -273,7 +283,7 @@ class NotebookDrawer(object):
 
     def _getJsCode(self):
         # produce JSON for the canvas
-        json = produceCanvasJson(self.drawableObject)
+        json = ProduceCanvasJson(self.drawableObject)
 
         # Here we could optimise the string manipulation
         divId = 'root_plot_' + str(self._getUID())
@@ -327,7 +337,7 @@ class NotebookDrawer(object):
            return [self._getJsDiv()]
 
         if _enableJSVisDebug:
-           return [self._getJsDiv(),self._getPngImage()]
+           return [self._getJsDiv(), self._getPngImage()]
 
         if self._canJsDisplay():
            return [self._getJsDiv()]
