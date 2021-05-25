@@ -11,7 +11,8 @@
 # For the list of contributors see $ROOTSYS/README/CREDITS.                    #
 ################################################################################
 
-from JupyROOT.helpers import cppcompleter, utils
+from JupyROOT.helpers import utils
+from JupyROOT import cppcompleter
 
 # Check if we are in the IPython shell
 try:
